@@ -1,0 +1,71 @@
+{% extends 'travels.html' %}
+
+{% block contenido %}
+
+  <div class="container">
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-10">
+        {% csrf_token %}
+          <h2 class="p-3 text-light">Bienvenido al viaje: {{trip.destination}}</h2>
+            <div class="row">
+                <div class="ms-5 col-3 text-muted">
+                    <h4>Planificado por:</h4>
+                </div>
+                <div class="col-8 mt-1 text-muted">
+                    <h5>{{trip.manager.first_name}} {{trip.manager.last_name}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ms-5 col-3 text-muted">
+                    <h4>Descripcion:</h4>
+                </div>
+                <div class="col-8 mt-1 text-muted">
+                    <h5>{{trip.description}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ms-5 col-3 text-muted">
+                    <h4>Fecha Comienzo:</h4>
+                </div>
+                <div class="col-8 mt-1 text-muted">
+                    <h5>{{trip.start_date}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ms-5 col-3 text-muted">
+                    <h4>Fecha Fin:</h4>
+                </div>
+                <div class="col-8 mt-1 text-muted">
+                    <h5>{{trip.end_date}}</h5>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h3 class="p-3 mt-3 text-light">Otros usuarios que participan</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                {% if not travelers %}
+                    <div class="col-8 mt-1 ms-5 text-muted">
+                        <h5>No hay participantes adicionales :(</h5>
+                    </div>
+                {% else %}
+                {% for traveler in travelers %}
+                <div class="col-8 mt-1 ms-5 text-muted">
+                    <h5>{{traveler.first_name}} {{traveler.last_name}}</h5>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+{% endblock %}

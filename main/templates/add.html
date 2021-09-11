@@ -1,0 +1,63 @@
+{% extends 'travels.html' %}
+
+{% block contenido %}
+
+  <div class="container">
+    <div class="row">
+    </div>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-6">
+          <h2 class="p-2 text-light">Agregar Viaje</h2>
+          <form method="POST" action="/add_trip">
+            {% csrf_token %}
+            <div class="row">
+                <div class="pt-4 ms-5 col-2">
+                    <label for="destination" class="form-label text-light">Destino:</label>
+                </div>
+                <div class="col-9 mb-2 mt-3">
+                    <input type="text" class="form-control" id="destination" name="destination">
+                </div>
+            </div>
+            <div class="row">
+                <div class="pt-4 ms-5 col-2">
+                    <label for="description" class="form-label text-light">Descripcion:</label>
+                </div>
+                <div class="col-9 mb-2 mt-3">
+                    <input type="text" class="form-control" id="description" name="description">
+                </div>
+            </div>
+            <div class="row">
+                <div class="pt-4 ms-5 col-4">
+                    <label for="start_date" class="form-label text-light">Fecha de Inicio</label>
+                </div>
+                <div class="col-7 mb-2 mt-3">
+                    <input type="date" class="form-control" data-date="" id="start_date" name="start_date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="pt-4 ms-5 col-4">
+                    <label for="end_date" class="form-label text-light">Fecha de Termino</label>
+                </div>
+                <div class="col-7 mb-2 mt-3">
+                    <input type="date" class="form-control" data-date="" id="end_date" name="end_date">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-5 ms-auto">Agregar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+$("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+</script>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'travels.html' %}
+
+{% block contenido %}
+            <div class='row container-fluid d-flex text-center'>
+                <div class='col-12'>
+                    <h1 class='fs-1 my-3 text-light' style="">Todos los viajes</h1>
+                    <table class="table table-info table-hover my-5 text-center">
+                        <thead>
+                            <tr>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Travel Start Date</th>
+                            <th scope="col">Travel End Date</th>
+                            <th scope="col">Plan</th>
+                            <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="overflow-scroll">
+                            {% for owner in owners %}
+                            <tr>
+                            <td>
+                                <a href="/{{owner.id}}/view">{{owner.destination}} </a>
+                            </td>
+                            <td>{{owner.start_date}}</td>
+                            <td>{{owner.end_date}}</td>
+                            <td>{{owner.description}}</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="d-inline m-0 p-0">
+                                    <a href="/{{owner.id}}/cancel" class="btn btn-outline-primary" title="Cancel">
+                                        <i class="fas fa-eye">Cancel</i>
+                                    </a>
+                                </div>
+                                <div class="d-inline m-0 p-0 ms-1">
+                                    <a href="/{{owner.id}}/delete" ctitle="Delete Information" class="lnk-del btn btn-outline-danger" data-title="delete" data-bs-toggle="modal" data-bs-target="#confirm-delete">
+                                        <i class="fas fa-edit">Delete</i>
+                                    </a>
+                                </div>      
+                            </td>
+                            </tr>
+                            {% endfor %}
+                            {% for traveler in travelers %}
+                            <tr>
+                            <td>
+                                <a href="/{{traveler.id}}/view">{{traveler.destination}} </a>
+                            </td>
+                            <td>{{traveler.start_date}}</td>
+                            <td>{{traveler.end_date}}</td>
+                            <td>{{traveler.description}}</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="d-inline m-0 p-0">
+                                    <a href="/{{traveler.id}}/cancel" class="btn btn-outline-primary" title="Cancel">
+                                        <i class="fas fa-eye">Cancel</i>
+                                    </a>
+                                </div>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h2 class='fs-1 my-3 text-light'>Viajes que te podrian interesar</h2>
+                    <table class="table table-info table-hover my-5 text-center">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Travel Start Date</th>
+                            <th scope="col">Travel End Date</th>
+                            <th scope="col">Join</th>
+                            </tr>
+                        </thead>
+                        <tbody class="overflow-scroll">
+                            {% for trip in trips %}
+                            <tr>
+                            <td>{{trip.manager.first_name}} {{trip.manager.last_name}}</td>
+                            <td>
+                                <a href="/{{trip.id}}/view">{{trip.destination}} </a>
+                            </td>
+                            <td>{{trip.start_date}}</td>
+                            <td>{{trip.end_date}}</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="d-inline m-0 p-0">
+                                    <a href="/{{trip.id}}/join" class="btn btn-outline-success" title="Join">
+                                        <i class="fas fa-eye">Join</i>
+                                    </a>
+                                </div>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row justify-content-center m-3">
+                        <div class="col-auto"><a href="/add" class="btn btn-success float-end"> Add Travel </a></div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
